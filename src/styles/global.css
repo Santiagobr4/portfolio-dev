@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* @theme is valid in Tailwind v4 - IDE warning can be ignored */
+@theme {
+  --font-sans: "Onest", "sans-serif";
+}
+
+@custom-variant dark (&:where(.dark, .dark *));

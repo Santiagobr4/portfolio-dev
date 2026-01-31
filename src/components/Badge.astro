@@ -1,0 +1,40 @@
+---
+type Props = {
+  href: string;
+  text?: string;
+  spinSeconds?: number;
+};
+
+const {
+  href,
+  text = "Disponible para trabajar",
+  spinSeconds = 3,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener"
+  class="group inline-flex items-center transition md:hover:scale-105"
+>
+  <span class="relative inline-flex overflow-hidden rounded-full p-px">
+    <!-- Borde animado -->
+    <span
+      class="absolute inset-[-1000%] animate-spin
+             bg-[conic-gradient(from_90deg_at_50%_50%,#38BDF8_0%,#1D4ED8_50%,#38BDF8_100%)]
+             dark:bg-[conic-gradient(from_90deg_at_50%_50%,#60A5FA_0%,#1E3A8A_50%,#60A5FA_100%)]"
+      style={`animation-duration:${spinSeconds}s; animation-timing-function:linear;`}
+    ></span>
+
+    <!-- Interior -->
+    <span
+      class="relative inline-flex items-center justify-center whitespace-nowrap rounded-full
+             px-3 py-1 text-sm font-medium backdrop-blur-3xl
+             bg-white/80 text-blue-700
+             dark:bg-slate-900/80 dark:text-white/80"
+    >
+      {text}
+    </span>
+  </span>
+</a>

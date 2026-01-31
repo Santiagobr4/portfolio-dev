@@ -1,0 +1,30 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+
+const EXPERIENCE = [
+  {
+    date: "Present",
+    title: "Web Developer",
+    description:
+      "Self-taught developer focused on modern web technologies. Building real projects with React, Astro, Tailwind CSS, and JavaScript while strengthening fundamentals in frontend and backend development.",
+  },
+  {
+    date: "2021 - 2025",
+    title: "QA Analyst / Training Lead - Financial Fraud Campaign",
+    description:
+      "Worked in a high-risk financial environment focused on quality assurance, process compliance, and root-cause analysis. Led training sessions, created performance dashboards, and collaborated closely with operations and stakeholders.",
+  },
+];
+---
+
+<ol
+  class="relative border-s border-slate-900/80 dark:border-white/10 ml-2.5 pl-4"
+>
+  {
+    EXPERIENCE.map((experience) => (
+      <li class="mb-10 ms-4">
+        <ExperienceItem {...experience} />
+      </li>
+    ))
+  }
+</ol>

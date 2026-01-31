@@ -1,0 +1,101 @@
+---
+import ThemeToggle from "../components/ThemeToggle.astro";
+
+const navItems = [
+  { title: "Home", label: "top", url: "/#top" },
+  { title: "Experience", label: "experience", url: "/#experience" },
+  { title: "Projects", label: "projects", url: "/#projects" },
+  { title: "About", label: "about", url: "/#about" },
+  { title: "Contact", label: "contact", url: "/#contact" },
+];
+---
+
+<header
+  class="fixed top-0 z-50 mt-2 flex w-full items-center justify-center px-4"
+>
+  <nav
+    class="nav-pill flex items-center justify-center rounded-full px-3 text-sm font-medium
+           text-slate-700 dark:text-slate-200"
+  >
+    {
+      navItems.map((link) => (
+        <a
+          class="relative block px-2 py-2 transition hover:text-blue-500 dark:hover:text-blue-400"
+          aria-label={link.label}
+          href={link.url}
+        >
+          {link.title}
+        </a>
+      ))
+    }
+
+    <!-- Theme toggle estilo midudev -->
+    <ThemeToggle />
+  </nav>
+</header>
+
+<!-- Scrollspy (opcional) para marcar link activo como midudev) -->
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("header nav a[aria-label]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((a) => {
+            a.classList.toggle(
+              "text-blue-500",
+              a.getAttribute("aria-label") === entry.target.id,
+            );
+          });
+        });
+      },
+      { root: null, rootMargin: "0px", threshold: 0.3 },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") observer.disconnect();
+      else sections.forEach((s) => observer.observe(s));
+    });
+  });
+</script>
+
+<style>
+  /* Base de la pill (como midudev) */
+  .nav-pill {
+    background: color-mix(in oklab, white 55%, transparent);
+  }
+  :global(.dark) .nav-pill {
+    background: color-mix(
+      in oklab,
+      rgb(15 23 42) 70%,
+      transparent
+    ); /* slate-900-ish */
+  }
+
+  /* ✅ Lo importante: animación ligada al scroll */
+  .nav-pill {
+    animation: nav-shadow 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 110px;
+  }
+
+  @keyframes nav-shadow {
+    0% {
+      box-shadow: none;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      border: 1px solid transparent;
+    }
+    100% {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+</style>

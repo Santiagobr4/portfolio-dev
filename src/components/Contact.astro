@@ -1,0 +1,30 @@
+---
+import SocialPill from "../components/SocialPill.astro";
+import LinkedInIcon from "../icons/LinkedIn.astro";
+import GitHubIcon from "../icons/GitHub.astro";
+import EmailIcon from "../icons/Email.astro";
+---
+
+<article>
+  <p
+    class="text-sm md:text-xl mb-6 text-center max-w-xl opacity-80 text-pretty"
+  >
+    I'm always open to discussing new projects, collaborations, or
+    opportunities. Feel free to reach out to me through any of the platforms
+    below.
+  </p>
+  <nav class="flex gap-3 flex-wrap justify-center">
+    <SocialPill
+      href="https://www.linkedin.com/in/santiago-barragan-real"
+      class="flex gap-x-2"
+    >
+      <LinkedInIcon class="size-4 md:size-6" />LinkedIn
+    </SocialPill>
+    <SocialPill href="https://github.com/Santiagobr4" class="flex gap-x-2">
+      <GitHubIcon class="size-4 md:size-6" />GitHub
+    </SocialPill>
+    <SocialPill href="mailto:santiagobr.44@gmail.com" class="flex gap-x-2">
+      <EmailIcon class="size-4 md:size-6" />santiagobr.44@gmail.com
+    </SocialPill>
+  </nav>
+</article>
